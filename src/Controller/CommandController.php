@@ -27,18 +27,18 @@ class CommandController extends CommonController
         $paymentProvider = $this->getPaymentProvider($this->post($request, 'psp', ''));
         $command = $this->post($request, 'command') ?? null;
         $payload = $this->post($request, 'payload') ?? [];
-//        $formType = $paymentProvider->getFormByCommand($command);
-//
-//        $form = $this->getLoadedForm($request, $formType);
-//
-//        if (!$form->isValid()) {
-//            return $this->json($form);
-//        }
-//
-//        $result = $paymentProvider->run($command, $form->getData());
 
-//        return $this->json($result->format(), $result->getStatusCode());
-        return $this->json($this->post($request));
+        $formType = $paymentProvider->getFormByCommand($command);
+
+        $form = $this->createForm($formType, null)->submit($this->post($request), true);
+
+        if (!$form->isValid()) {
+            return $this->json($form);
+        }
+
+        $result = $paymentProvider->run($command, $form->getData());
+
+        return $this->json($result->format(), $result->getStatusCode());
     }
 
     private function getPaymentProvider(string $code): PaymentProviderInterface

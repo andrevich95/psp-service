@@ -9,9 +9,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class NotificationController extends CommonController
 {
     /**
-     * @Route("/api/notification/apple", name="notification_apple", methods={"POST"})
+     * @Route("/api/notification/apple/response-body-v1", name="notification_apple_response_body_v1", methods={"POST"})
      */
-    public function executeCommand(Request $request): JsonResponse
+    public function notification(Request $request): JsonResponse
     {
         $data = $this->post($request, 'payload');
 
