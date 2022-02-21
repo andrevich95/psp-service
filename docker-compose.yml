@@ -9,6 +9,8 @@ services:
       - .env
     networks:
       - general
+    ports:
+      - 8089:80
 
 networks:
   general:

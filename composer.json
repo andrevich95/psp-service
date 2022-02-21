@@ -9,14 +9,15 @@
         "php": ">=8.0.2",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "doctrine/annotations": "^1.13",
+        "doctrine/migrations": "^3.4",
         "symfony/console": "6.0.*",
         "symfony/dotenv": "6.0.*",
         "symfony/flex": "^2",
+        "symfony/form": "6.0.*",
         "symfony/framework-bundle": "6.0.*",
         "symfony/runtime": "6.0.*",
         "symfony/yaml": "6.0.*"
-    },
-    "require-dev": {
     },
     "config": {
         "allow-plugins": {
@@ -68,5 +69,8 @@
             "allow-contrib": false,
             "require": "6.0.*"
         }
+    },
+    "require-dev": {
+        "symfony/maker-bundle": "^1.37"
     }
 }

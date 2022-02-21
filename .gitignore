@@ -1,7 +1,6 @@
 .DS_Store
 .idea
 .env
-supervisord.log
 
 ###> symfony/framework-bundle ###
 /.env.local
