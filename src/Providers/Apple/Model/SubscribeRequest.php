@@ -6,16 +6,16 @@ use DateTimeInterface;
 
 class SubscribeRequest
 {
-    private int $number;
+    private string $product_id;
 
-    public function getNumber(): int
+    public function getProductId(): string
     {
-        return $this->number;
+        return $this->product_id;
     }
 
-    public function setNumber(int $number): self
+    public function setProductId(string $product_id): self
     {
-        $this->number = $number;
+        $this->product_id = $product_id;
         return $this;
     }
 }

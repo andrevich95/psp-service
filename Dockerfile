@@ -1,7 +1,7 @@
 FROM php:8.0-fpm-alpine
 
 RUN apk update && apk add --no-cache --virtual .build-deps postgresql-dev g++ make autoconf yaml-dev supervisor nginx git composer \
-autoconf php8-ctype php8-xml libzip-dev zip libxslt-dev php8-tokenizer php8-mbstring && \
+autoconf php8-ctype php8-xml libzip-dev zip libxslt-dev php8-tokenizer php8-mbstring php8-pdo php8-dom php8-simplexml && \
 apk add bash nano
 
 RUN apk update && docker-php-ext-install pdo pdo_pgsql pgsql opcache zip xsl

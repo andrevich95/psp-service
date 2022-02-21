@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Providers\Interfaces\PaymentProviderInterface;
 use App\Providers\PaymentProviderFactory;
 use App\Serializer\FormErrorSerializerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -11,6 +10,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CommandController extends CommonController
 {
+    use PaymentProviderTrait;
+
     private PaymentProviderFactory $paymentManager;
 
     public function __construct(FormErrorSerializerInterface $formErrorSerializer, PaymentProviderFactory $paymentManager)
@@ -30,7 +31,7 @@ class CommandController extends CommonController
 
         $formType = $paymentProvider->getFormByCommand($command);
 
-        $form = $this->createForm($formType, null)->submit($this->post($request), true);
+        $form = $this->createForm($formType, null)->submit($payload, true);
 
         if (!$form->isValid()) {
             return $this->json($form);
@@ -39,10 +40,5 @@ class CommandController extends CommonController
         $result = $paymentProvider->run($command, $form->getData());
 
         return $this->json($result->format(), $result->getStatusCode());
-    }
-
-    private function getPaymentProvider(string $code): PaymentProviderInterface
-    {
-        return $this->paymentManager->getPaymentProvider($code);
     }
 }

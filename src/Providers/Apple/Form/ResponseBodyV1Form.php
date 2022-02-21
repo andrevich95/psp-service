@@ -3,8 +3,8 @@
 namespace App\Providers\Apple\Form;
 
 use App\Providers\Apple\Model\ResponseBodyV1Request;
-use Doctrine\DBAL\Types\BooleanType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -22,7 +22,7 @@ class ResponseBodyV1Form extends AbstractType
         $builder
             ->add('auto_renew_adam_id', IntegerType::class, $notEmpty)
             ->add('auto_renew_product_id', TextType::class, $notEmpty)
-            ->add('auto_renew_status', BooleanType::class, $notEmpty)
+            ->add('auto_renew_status', CheckboxType::class, $notEmpty)
             ->add('auto_renew_status_change_date', DateTimeType::class, [
                 'widget' => 'single_text',
                 'constraints' => new NotBlank(),
@@ -34,7 +34,7 @@ class ResponseBodyV1Form extends AbstractType
             ])
             ->add('bid', TextType::class, $notEmpty)
             ->add('bvrs', TextType::class, $notEmpty)
-            ->add('environment', TextType::class, [
+            ->add('environment', ChoiceType::class, [
                 'choices' => ResponseBodyV1Request::getAvailableEnvTypes(),
                 'constraints' => new NotBlank(),
             ])

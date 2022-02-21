@@ -17,9 +17,9 @@ class ResponseBodyV1Request
     private int $auto_renew_adam_id;
     private string $auto_renew_product_id;
     private bool $auto_renew_status;
-    private DateTimeInterface $auto_renew_status_change_date;
+    private ?DateTimeInterface $auto_renew_status_change_date = null;
     private int $auto_renew_status_change_date_ms;
-    private DateTimeInterface $auto_renew_status_change_date_pst;
+    private ?DateTimeInterface $auto_renew_status_change_date_pst = null;
     private string $bid;
     private string $bvrs;
     private string $environment;
@@ -61,12 +61,12 @@ class ResponseBodyV1Request
         return $this;
     }
 
-    public function getAutoRenewStatusChangeDate(): DateTimeInterface
+    public function getAutoRenewStatusChangeDate(): ?DateTimeInterface
     {
         return $this->auto_renew_status_change_date;
     }
 
-    public function setAutoRenewStatusChangeDate(DateTimeInterface $auto_renew_status_change_date): self
+    public function setAutoRenewStatusChangeDate(?DateTimeInterface $auto_renew_status_change_date): self
     {
         $this->auto_renew_status_change_date = $auto_renew_status_change_date;
         return $this;
@@ -83,12 +83,12 @@ class ResponseBodyV1Request
         return $this;
     }
 
-    public function getAutoRenewStatusChangeDatePst(): DateTimeInterface
+    public function getAutoRenewStatusChangeDatePst(): ?DateTimeInterface
     {
         return $this->auto_renew_status_change_date_pst;
     }
 
-    public function setAutoRenewStatusChangeDatePst(DateTimeInterface $auto_renew_status_change_date_pst): self
+    public function setAutoRenewStatusChangeDatePst(?DateTimeInterface $auto_renew_status_change_date_pst): self
     {
         $this->auto_renew_status_change_date_pst = $auto_renew_status_change_date_pst;
         return $this;
@@ -169,6 +169,14 @@ class ResponseBodyV1Request
     {
         $this->password = $password;
         return $this;
+    }
+
+    public function isSucceed(): bool
+    {
+        return in_array($this->notification_type, [
+            self::INITIAL_BUY,
+            self::DID_RENEW,
+        ]);
     }
 
     public static function getAvailableNotificationTypes(): array

@@ -2,12 +2,8 @@
 
 namespace App\Providers\Apple\Form;
 
-use App\Providers\Apple\Model\ResponseBodyV1Request;
-use Doctrine\DBAL\Types\BooleanType;
+use App\Providers\Apple\Model\SubscribeRequest;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -20,14 +16,14 @@ class SubscribeForm extends AbstractType
         $notEmpty = ['constraints' => new NotBlank()];
 
         $builder
-            ->add('number', IntegerType::class, $notEmpty);
+            ->add('product_id', TextType::class, $notEmpty);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'allow_extra_fields' => true,
-            'data_class' => ResponseBodyV1Request::class,
+            'data_class' => SubscribeRequest::class,
         ]);
     }
 }
