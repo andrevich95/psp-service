@@ -1,0 +1,15 @@
+version: '3.6'
+services:
+  app:
+    container_name: psp-service
+    build: .
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    networks:
+      - general
+
+networks:
+  general:
+    driver: bridge
